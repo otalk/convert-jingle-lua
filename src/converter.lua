@@ -4,19 +4,26 @@ local M = {}
 local mapTable = {}
 
 function M.register(name, namespace, t)
-  local key = name .. "|" .. namespace
-  mapTable[key] = t
+    local key = name .. "|" .. namespace
+    mapTable[key] = t
 end
 
-function M.toTable(element)
-  local key = element.name .. "|" .. element.attr.xmlns
-  return mapTable[key].toTable
+function M.toTable(name, namespace)
+    local key = name .. "|" .. namespace
+    if mapTable[key] then
+        return mapTable[key].toTable
+    else
+        return nil
+    end
 end
 
-function M.toXML(name, namespace)
-  local key = name .. "|" .. namespace
-  return mapTable[key].toXML
+function M.toStanza(name, namespace)
+    local key = name .. "|" .. namespace
+    if mapTable[key] then
+        return mapTable[key].toStanza
+    else
+        return nil
+    end
 end
 
 return M
-
