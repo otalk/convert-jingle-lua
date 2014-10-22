@@ -68,7 +68,7 @@ end
 
 function M.addChildren(element, object, key, name, namespace)
     local toStanza = converter.toStanza(name, namespace)
-    if toStanza then
+    if toStanza and object[key] then
         for _, child in pairs(object[key]) do
             element:add_child(toStanza(child))
         end
